@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class Config:
+
+class Config(object):
     SECRET_KEY = "SWOOP"
     POSTGRES_USER = os.environ['POSTGRES_USER']
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']

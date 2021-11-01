@@ -1,19 +1,16 @@
 from flask import current_app
-from backend import db, app
+from backend import db
 from flask_login import UserMixin
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy import MetaData, func
+from sqlalchemy import MetaData, func, create_engine
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-postgres_metadata = MetaData(schema=current_app.config.get('POSTGRES_SCHEMA'))
-Base = declarative_base(metadata=postgres_metadata)
-db_session = scoped_session(sessionmaker(bind=db.get_engine(bind='postgresql')))
-Base.query = db_session.query_property()
+engine = create_engine(current_app.config.get('SQLALCHEMY_DATABASE_URI')) # connect to server
+engine.execute(f"CREATE SCHEMA IF NOT EXISTS {current_app.config.get('POSTGRES_SCHEMA')};") #create db
 
-
-class UserAccount(UserMixin, Base):
+class UserAccount(UserMixin, db.Model):
     """User Account table """
     __bind_key__ = 'postgresql'
     __tablename__ = 'user_account'
@@ -54,7 +51,7 @@ class UserAccount(UserMixin, Base):
         return check_password_hash(self.password_hash, password)
 
 
-class SocialProfile(Base):
+class SocialProfile(db.Model):
     """Social Profile table """
     __bind_key__ = 'postgresql'
     __tablename__ = 'social_profile'
@@ -74,7 +71,7 @@ class SocialProfile(Base):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class AccountAuthentication(Base):
+class AccountAuthentication(db.Model):
     """Account Authentications table """
     __bind_key__ = 'postgresql'
     __tablename__ = 'account_authentication'
@@ -91,7 +88,7 @@ class AccountAuthentication(Base):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class PasswordChange(Base):
+class PasswordChange(db.Model):
     """Password Change table """
     __bind_key__ = 'postgresql'
     __tablename__ = 'password_change'
