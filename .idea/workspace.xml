@@ -2,29 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a767048-89f4-40e4-a06c-f1d71edbfc67" name="Default Changelist" comment="">
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.gitignore" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/social_media_sharing.iml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/app.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/app/Config.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/app/__init__.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/app/main/__init__.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/app/main/routes.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Facebook.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Instagram.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/LinkedIn.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Phone.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Profile.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Snapchat.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/SocialMediaAccount.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Spotify.py" afterDir="false" />
-      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/models.py" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/.env" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/Config.py" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/__init__.py" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/api/main/routes.py" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/application.py" afterDir="false" />
+      <change afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/models.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/.gitignore" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/.gitignore" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/app.py" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/app/Config.py" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/app/__init__.py" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/app/main/__init__.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/api/main/__init__.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/app/main/routes.py" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Facebook.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Facebook.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Instagram.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Instagram.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/LinkedIn.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/LinkedIn.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Phone.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Phone.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Profile.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Profile.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Snapchat.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Snapchat.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/SocialMediaAccount.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/SocialMediaAccount.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/lib/Spotify.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Spotify.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/models.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +61,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -80,11 +80,40 @@
       <recent name="$USER_HOME$/PycharmProjects/social_media_sharing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/PycharmProjects/social_media_sharing/backend" />
+      <recent name="$USER_HOME$/PycharmProjects/social_media_sharing" />
       <recent name="$USER_HOME$/PycharmProjects/social_media_sharing/app" />
       <recent name="$USER_HOME$/PycharmProjects/social_media_sharing/lib" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.application">
+    <configuration name="application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="social_media_sharing" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="POSTGRES_USER" value="adminuser" />
+        <env name="POSTGRES_PASSWORD" value="gils12" />
+        <env name="POSTGRES_SERVER" value="localhost" />
+        <env name="POSTGRES_PORT" value="5432" />
+        <env name="POSTGRES_DB" value="postgres" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="/$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="/$PROJECT_DIR$/backend/application.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Flask" type="Python.FlaskServer" nameIsGenerated="true">
       <module name="social_media_sharing" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -98,6 +127,15 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flask server.Flask" />
+      <item itemvalue="Python.application" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.application" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -109,18 +147,39 @@
       <updated>1634601359096</updated>
       <workItem from="1634601368509" duration="7513000" />
       <workItem from="1635536714118" duration="33000" />
-      <workItem from="1635651316733" duration="2369000" />
+      <workItem from="1635651316733" duration="3055000" />
+      <workItem from="1635719023379" duration="6010000" />
     </task>
+    <task id="LOCAL-00001" summary="basic structures">
+      <created>1635653692999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635653693000</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="basic structures" />
     <option name="LAST_COMMIT_MESSAGE" value="basic structures" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/social_media_sharing$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1634607696741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/social_media_sharing$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1635729206399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
+    <SUITE FILE_PATH="coverage/social_media_sharing$app.coverage" NAME="application Coverage Results" MODIFIED="1635731412276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
   </component>
 </project>
