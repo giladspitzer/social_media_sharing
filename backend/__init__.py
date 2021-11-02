@@ -23,4 +23,5 @@ def create_app(config_class=config.Config):
 
 
 app = create_app()
+app.app_context().push()
 from backend import models

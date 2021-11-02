@@ -23,7 +23,7 @@ class UserAccount(UserMixin, db.Model):
     last_active = db.Column(db.DateTime)
     password_changes = db.relationship('PasswordChange', backref='user', lazy='dynamic')
     authentications = db.relationship('AccountAuthentication', backref='user', lazy='dynamic')
-    social_profile = db.relationship('AccountAuthentication', backref='user', lazy='dynamic', uselist=False)
+    social_profile = db.relationship('SocialProfile', backref='user', uselist=False)
 
     deleted = db.Column(db.Boolean, default=False)
     deleted_at = db.Column(db.DateTime)
@@ -45,7 +45,7 @@ class UserAccount(UserMixin, db.Model):
 
     @property
     def password_hash(self):
-        return PasswordChange.get_password(self.id)
+        return PasswordChange.get_password(self.id).new_password_hash
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
