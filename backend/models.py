@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 engine = create_engine(current_app.config.get('SQLALCHEMY_DATABASE_URI')) # connect to server
 engine.execute(f"CREATE SCHEMA IF NOT EXISTS {current_app.config.get('POSTGRES_SCHEMA')};") #create db
 
+
 class UserAccount(UserMixin, db.Model):
     """User Account table """
     __bind_key__ = 'postgresql'
@@ -33,6 +34,25 @@ class UserAccount(UserMixin, db.Model):
     def __repr__(self):
         return f"<User: {self.first_name} {self.last_name} ({self.id})>"
 
+    def __init__(self, email, first, last):
+        self.email = email
+        self.first_name = first
+        self.last_name = last
+
+    @classmethod
+    def get(cls, email):
+        return db.session.query(cls).filter_by(email=email).first()
+
+    @classmethod
+    def create(cls, email, first, last, password):
+        new_user = cls(email, first, last)
+        db.session.add(new_user)
+        db.session.commit()
+        added_user = cls.get(email)
+        added_user.set_password(password)
+        added_user.update_last_active()
+        return added_user
+
     def update_last_active(self):
         """Updates a user's last_login field on every login"""
         self.last_active = datetime.utcnow()
@@ -49,6 +69,10 @@ class UserAccount(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    @classmethod
+    def check_email_availability(cls, email):
+        return db.session.query(cls).filter_by(email=email).first() is None
 
 
 class SocialProfile(db.Model):

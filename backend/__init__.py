@@ -19,6 +19,9 @@ def create_app(config_class=config.Config):
     from backend.api.main import bp as main_bp
     application.register_blueprint(main_bp)
 
+    from backend.api.auth import bp as auth_bp
+    application.register_blueprint(auth_bp, url_prefix='/auth')
+
     return application
 
 
