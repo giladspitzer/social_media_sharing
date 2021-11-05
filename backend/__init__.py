@@ -2,9 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from backend import Config as config
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+auth = LoginManager()
 
 
 def create_app(config_class=config.Config):
@@ -14,6 +16,7 @@ def create_app(config_class=config.Config):
     with application.app_context():
         db.init_app(application)
         migrate.init_app(application, db)
+        auth.init_app(application)
         from backend import models
 
     from backend.api.main import bp as main_bp
