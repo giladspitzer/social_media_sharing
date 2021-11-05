@@ -1,14 +1,31 @@
 from flask import current_app
-from backend import db
+from backend import db, auth
 from flask_login import UserMixin
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy import MetaData, func, create_engine
+from sqlalchemy import func, create_engine
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
 
 engine = create_engine(current_app.config.get('SQLALCHEMY_DATABASE_URI')) # connect to server
 engine.execute(f"CREATE SCHEMA IF NOT EXISTS {current_app.config.get('POSTGRES_SCHEMA')};") #create db
+
+
+@auth.request_loader
+def load_user(request):
+    auth_headers = request.headers.get('Authorization', '').split()
+    if len(auth_headers) != 2:
+        return None
+    try:
+        token = auth_headers[1]
+        data = jwt.decode(token, current_app.config['SECRET_KEY'])
+        user = UserAccount.get(uid=data['sub'])
+        if user:
+            return user
+    except jwt.ExpiredSignatureError:
+        return None
+    except (jwt.InvalidTokenError, Exception) as e:
+        return None
+    return None
 
 
 class UserAccount(UserMixin, db.Model):
@@ -40,8 +57,14 @@ class UserAccount(UserMixin, db.Model):
         self.last_name = last
 
     @classmethod
-    def get(cls, email):
-        return db.session.query(cls).filter_by(email=email).first()
+    def get(cls, email=None, uid=None):
+        if email is None and uid is None:
+            return None
+        else:
+            if email is not None:
+                return db.session.query(cls).filter_by(email=email).first()
+            elif uid is not None:
+                return db.session.query(cls).filter_by(id=uid).first()
 
     @classmethod
     def create(cls, email, first, last, password):

@@ -1,19 +1,15 @@
-from flask import jsonify, request
+from flask import jsonify, request, current_app
 from backend.api.main import bp
+from flask_login import login_required
 
 
-@bp.before_request
-def before_request():
-    print('hi')
-
-
-@bp.route('/')
-def index():
+@bp.route('/protected')
+@login_required
+def protected():
     return jsonify('hi')
 
 
-@bp.route('/register', methods=['POST'])
+@bp.route('/open')
 def register():
-    account_data = request.json
-
+    print(request.headers)
     return jsonify('hi')

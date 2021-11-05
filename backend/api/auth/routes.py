@@ -1,6 +1,8 @@
-from flask import jsonify, request, abort
+from flask import jsonify, request, abort, current_app
 from backend.api.auth import bp as auth
 from backend.models import UserAccount
+import jwt
+from datetime import datetime, timedelta
 
 
 @auth.route('/register', methods=['POST'])
@@ -20,11 +22,25 @@ def register():
                            )
     return jsonify('200')
 
+
 @auth.route('/login', methods=['POST'])
 def login():
     account_data = request.json
-    print(account_data)
-    return jsonify('hi')
+    user = UserAccount.get(email=account_data['email'].lower())
+    if not user.check_password(account_data['password']):
+        abort(403)
+    token = jwt.encode({
+        'sub': user.id,
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(minutes=current_app.config.get('TOKEN_TIMEOUT'))},
+        current_app.config['SECRET_KEY']).decode()
+    refresh_token = jwt.encode({
+        'sub': user.id,
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(minutes=current_app.config.get('REFRESH_TOKEN_TIMEOUT'))},
+        current_app.config['SECRET_KEY']).decode()
+    return jsonify({"access_token": token, "refresh_token": refresh_token,
+                    "access_token_expiry": current_app.config.get('TOKEN_TIMEOUT')})
 
 
 @auth.route('/set-password', methods=['POST'])
