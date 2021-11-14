@@ -4,6 +4,10 @@
     <list default="true" id="8a767048-89f4-40e4-a06c-f1d71edbfc67" name="Default Changelist" comment="">
       <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/api/auth/routes.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/api/auth/routes.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Facebook.py" beforeDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Profile.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/lib/Profile.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/migrations/versions/6e7972f48883_.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/migrations/versions/6e7972f48883_.py" afterDir="false" />
+      <change beforePath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/models.py" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/social_media_sharing/backend/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +149,8 @@
       <workItem from="1635793891331" duration="3319000" />
       <workItem from="1635820798942" duration="1804000" />
       <workItem from="1635993127223" duration="4185000" />
-      <workItem from="1636068096329" duration="4513000" />
+      <workItem from="1636068096329" duration="4905000" />
+      <workItem from="1636851935330" duration="1940000" />
     </task>
     <task id="LOCAL-00001" summary="basic structures">
       <created>1635653692999</created>
@@ -203,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636072700949</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="#2 refresh token">
+      <created>1636073317937</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1636073317937</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,11 +240,12 @@
     <MESSAGE value="fixed relationships" />
     <MESSAGE value="auth blueprint, registration" />
     <MESSAGE value="#1 user-loader, jwt auth, protected and non in main" />
-    <option name="LAST_COMMIT_MESSAGE" value="#1 user-loader, jwt auth, protected and non in main" />
+    <MESSAGE value="#2 refresh token" />
+    <option name="LAST_COMMIT_MESSAGE" value="#2 refresh token" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/social_media_sharing$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1635729206399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
     <SUITE FILE_PATH="coverage/social_media_sharing$app.coverage" NAME="application Coverage Results" MODIFIED="1635731443122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
-    <SUITE FILE_PATH="coverage/social_media_sharing$application.coverage" NAME="application Coverage Results" MODIFIED="1636072948238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
+    <SUITE FILE_PATH="coverage/social_media_sharing$application.coverage" NAME="application Coverage Results" MODIFIED="1636853875889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PycharmProjects/social_media_sharing" />
   </component>
 </project>

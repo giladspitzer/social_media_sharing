@@ -1,6 +1,6 @@
 from flask import jsonify, request, abort, current_app
 from backend.api.auth import bp as auth
-from backend.models import UserAccount
+from backend.models import UserAccount, AccountAuthentication
 import jwt
 from datetime import datetime, timedelta
 from flask_login import current_user, login_required
@@ -16,11 +16,12 @@ def register():
     if len(account_data['password']) < 7:
         print(account_data['password'], len(account_data['password']))
         return "Illegal Password", 400
-    new_user = UserAccount.create(email=account_data['email'].lower(),
-                                  first=account_data['firstName'],
-                                  last=account_data['lastName'],
-                                  password=account_data['password']
-                           )
+    UserAccount.create(email=account_data['email'].lower(),
+                       first=account_data['firstName'],
+                       last=account_data['lastName'],
+                       password=account_data['password'],
+                       ip=request.remote_addr
+                       )
     return jsonify('200')
 
 
@@ -28,7 +29,11 @@ def register():
 def login():
     account_data = request.json
     user = UserAccount.get(email=account_data['email'].lower())
-    if not user.check_password(account_data['password']):
+    AccountAuthentication.create(user.email if user is not None else None,
+                                 account_data['password'],
+                                 request.remote_addr,
+                                 user.id if user is not None else None)
+    if user is None or not user.check_password(account_data['password']):
         abort(403)
     token = jwt.encode({
         'sub': user.id,

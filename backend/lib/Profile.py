@@ -1,4 +1,4 @@
-import Spotify as spot, Instagram as insta, Phone as phone, Snapchat as snap, Facebook as fb, LinkedIn as li
+import Spotify as spot, Instagram as insta, Phone as phone, Snapchat as snap, LinkedIn as li
 
 
 class Profile:

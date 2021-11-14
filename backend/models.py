@@ -53,8 +53,8 @@ class UserAccount(UserMixin, db.Model):
 
     def __init__(self, email, first, last):
         self.email = email
-        self.first_name = first
-        self.last_name = last
+        self.first_name = first.lower().capitalize()
+        self.last_name = last.lower().capitalize()
 
     @classmethod
     def get(cls, email=None, uid=None):
@@ -67,13 +67,14 @@ class UserAccount(UserMixin, db.Model):
                 return db.session.query(cls).filter_by(id=uid).first()
 
     @classmethod
-    def create(cls, email, first, last, password):
+    def create(cls, email, first, last, password, ip, session=None):
         new_user = cls(email, first, last)
         db.session.add(new_user)
         db.session.commit()
         added_user = cls.get(email)
-        added_user.set_password(password)
+        added_user.set_password(password, ip, session)
         added_user.update_last_active()
+        SocialProfile.create(added_user.id)
         return added_user
 
     def update_last_active(self):
@@ -81,10 +82,9 @@ class UserAccount(UserMixin, db.Model):
         self.last_active = datetime.utcnow()
         db.session.commit()
 
-    def set_password(self, password):
+    def set_password(self, password, ip, session):
         """Generates password hash from provided string and sets as user's password"""
-        # TODO -- fix ip and session_id
-        PasswordChange.create(self.id, password, 'ip', 'session_id')
+        PasswordChange.create(self.id, password, ip, session)
 
     @property
     def password_hash(self):
@@ -96,6 +96,10 @@ class UserAccount(UserMixin, db.Model):
     @classmethod
     def check_email_availability(cls, email):
         return db.session.query(cls).filter_by(email=email).first() is None
+
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class SocialProfile(db.Model):
@@ -112,10 +116,19 @@ class SocialProfile(db.Model):
     insta = db.Column(db.String(512), unique=True, index=True)
     spotify = db.Column(db.String(512), unique=True, index=True)
     linkedin = db.Column(db.String(512), unique=True, index=True)
-    facebook = db.Column(db.String(512), unique=True, index=True)
 
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<Social Profile: {self.id} of {self.user.name}>"
+
+    @classmethod
+    def create(cls, u_id):
+        profile = cls(user_id=u_id)
+        db.session.add(profile)
+        db.session.commit()
+        return profile
 
 
 class AccountAuthentication(db.Model):
@@ -125,7 +138,7 @@ class AccountAuthentication(db.Model):
     __table_args__ = {"schema": current_app.config['POSTGRES_SCHEMA']}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(512))
+    email = db.Column(db.String(512))
     password_hash = db.Column(db.String(512))
     user_id = db.Column(db.Integer, db.ForeignKey(f'{current_app.config["POSTGRES_SCHEMA"]}.user_account.id'))
     ip_address = db.Column(db.String(512))
@@ -133,6 +146,22 @@ class AccountAuthentication(db.Model):
 
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<Account Auth: {self.id}>"
+
+    def __init__(self, email, password, ip, u_id):
+        self.email = email
+        self.password_hash = generate_password_hash(password)
+        self.ip_address = ip
+        self.user_id = u_id
+
+    @classmethod
+    def create(cls, email, password, ip, u_id=None):
+        auth = cls(email, password, ip, u_id)
+        db.session.add(auth)
+        db.session.commit()
+        return auth
 
 
 class PasswordChange(db.Model):

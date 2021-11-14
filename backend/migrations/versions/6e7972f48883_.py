@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 6e7972f48883
-Revises: 
+Revises:
 Create Date: 2021-11-01 18:50:11.686993
 
 """
@@ -34,7 +34,7 @@ def upgrade():
     op.create_index(op.f('ix_social_media_user_account_email'), 'user_account', ['email'], unique=True, schema='social_media')
     op.create_table('account_authentication',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=512), nullable=True),
+    sa.Column('email', sa.String(length=512), nullable=True),
     sa.Column('password_hash', sa.String(length=512), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('ip_address', sa.String(length=512), nullable=True),
@@ -67,7 +67,6 @@ def upgrade():
     sa.Column('insta', sa.String(length=512), nullable=True),
     sa.Column('spotify', sa.String(length=512), nullable=True),
     sa.Column('linkedin', sa.String(length=512), nullable=True),
-    sa.Column('facebook', sa.String(length=512), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['social_media.user_account.id'], ),
