@@ -61,7 +61,7 @@ def upgrade():
     op.create_table('social_profile',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('email', sa.String(length=512), nullable=True),
+    sa.Column('bio', sa.String(length=512), nullable=True),
     sa.Column('phone', sa.String(length=512), nullable=True),
     sa.Column('snap', sa.String(length=512), nullable=True),
     sa.Column('insta', sa.String(length=512), nullable=True),
@@ -73,7 +73,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='social_media'
     )
-    op.create_index(op.f('ix_social_media_social_profile_email'), 'social_profile', ['email'], unique=True, schema='social_media')
     op.create_index(op.f('ix_social_media_social_profile_facebook'), 'social_profile', ['facebook'], unique=True, schema='social_media')
     op.create_index(op.f('ix_social_media_social_profile_insta'), 'social_profile', ['insta'], unique=True, schema='social_media')
     op.create_index(op.f('ix_social_media_social_profile_linkedin'), 'social_profile', ['linkedin'], unique=True, schema='social_media')

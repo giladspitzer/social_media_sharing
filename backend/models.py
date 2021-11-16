@@ -42,6 +42,7 @@ class UserAccount(UserMixin, db.Model):
     password_changes = db.relationship('PasswordChange', backref='user', lazy='dynamic')
     authentications = db.relationship('AccountAuthentication', backref='user', lazy='dynamic')
     social_profile = db.relationship('SocialProfile', backref='user', uselist=False)
+    lookups = db.relationship('ProfileLookup', backref='user', lazy='dynamic')
 
     deleted = db.Column(db.Boolean, default=False)
     deleted_at = db.Column(db.DateTime)
@@ -101,6 +102,10 @@ class UserAccount(UserMixin, db.Model):
     def name(self):
         return f"{self.first_name} {self.last_name}"
 
+    def get_lookups(self):
+        # TODO -- sort, paginate, remove dublicates
+        return []
+
 
 class SocialProfile(db.Model):
     """Social Profile table """
@@ -110,12 +115,13 @@ class SocialProfile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(f'{current_app.config["POSTGRES_SCHEMA"]}.user_account.id'))
-    email = db.Column(db.String(512), unique=True, index=True)
+    bio = db.Column(db.String(512))
     phone = db.Column(db.String(512), unique=True, index=True)
     snap = db.Column(db.String(512), unique=True, index=True)
     insta = db.Column(db.String(512), unique=True, index=True)
     spotify = db.Column(db.String(512), unique=True, index=True)
     linkedin = db.Column(db.String(512), unique=True, index=True)
+    queries = db.relationship('ProfileLookup', backref='profile', lazy='dynamic')
 
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -129,6 +135,32 @@ class SocialProfile(db.Model):
         db.session.add(profile)
         db.session.commit()
         return profile
+
+    def update(self, data):
+        self.bio = data['bio']
+        self.phone = data['phone']
+        self.snap = data['snap']
+        self.insta = data['insta']
+        self.spotify = data['spotify']
+        self.linkedin = data['linkedin']
+        db.session.commit()
+
+    @classmethod
+    def get(cls, p_id):
+        return db.session.query(cls).filter_by(id=p_id).first()
+
+    def jsonify(self):
+        return {"name": self.user.name,
+                "bio": self.bio,
+                "phone": self.phone,
+                "snap": self.snap,
+                "insta": self.insta,
+                "spotify": self.spotify,
+                "linkedin": self.linkedin}
+
+    def get_queries(self):
+        # TODO -- sort, paginate, remove dublicates
+        return []
 
 
 class AccountAuthentication(db.Model):
@@ -194,3 +226,26 @@ class PasswordChange(db.Model):
     @classmethod
     def get_password(cls, user_id):
         return db.session.query(cls).filter_by(user_id=user_id).order_by(cls.created_at.desc()).first()
+
+
+class ProfileLookup(db.Model):
+    """Profile Lookup table """
+    __bind_key__ = 'postgresql'
+    __tablename__ = 'profile_lookup'
+    __table_args__ = {"schema": current_app.config['POSTGRES_SCHEMA']}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{current_app.config["POSTGRES_SCHEMA"]}.user_account.id'),
+                        index=True)
+    social_profile_id = db.Column(db.Integer, db.ForeignKey(f'{current_app.config["POSTGRES_SCHEMA"]}.social_profile.id'),
+                                  index=True)
+
+    updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), onupdate=func.current_timestamp())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @classmethod
+    def create(cls, user_id, profile_id):
+        lookup = cls(user_id=user_id, social_profile_id=profile_id)
+        db.session.add(lookup)
+        db.session.commit()
+        return lookup

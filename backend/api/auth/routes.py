@@ -14,7 +14,6 @@ def register():
     if not UserAccount.check_email_availability(account_data['email'].lower()):
         return "Email already in use", 400
     if len(account_data['password']) < 7:
-        print(account_data['password'], len(account_data['password']))
         return "Illegal Password", 400
     UserAccount.create(email=account_data['email'].lower(),
                        first=account_data['firstName'],
