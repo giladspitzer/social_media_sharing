@@ -3,7 +3,7 @@ from flask_login import current_user
 from backend.api.main import bp
 from flask_login import login_required
 from backend.models import SocialProfile, ProfileLookup
-
+from backend.utils import query_string_decoder
 
 @bp.route('/submit-profile', methods=['POST'])
 @login_required
@@ -28,3 +28,17 @@ def register(p_id):
     if profile.id != current_user.social_profile.id:
         ProfileLookup.create(current_user.id, profile.id)
     return jsonify(profile.jsonify())
+
+@bp.route('/my-viewed')
+@login_required
+def get_my_viewed():
+    page = query_string_decoder(request.query_string, 'page', 'int', 1)
+    profiles = current_user.get_viewed(page)
+    return jsonify([profile.jsonify() for profile in profiles])
+
+@bp.route('/my-viewers')
+@login_required
+def get_my_viewers():
+    page = query_string_decoder(request.query_string, 'page', 'int', 1)
+    users = current_user.social_profile.get_viewers(page)
+    return jsonify([user.social_profile.jsonify() for user in users])

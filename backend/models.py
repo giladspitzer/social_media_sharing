@@ -102,9 +102,17 @@ class UserAccount(UserMixin, db.Model):
     def name(self):
         return f"{self.first_name} {self.last_name}"
 
-    def get_lookups(self):
-        # TODO -- sort, paginate, remove dublicates
-        return []
+    def get_viewed(self, page):
+        profiles = db.session.query(SocialProfile) \
+            .join(ProfileLookup) \
+            .filter(self.id == ProfileLookup.user_id,
+                    SocialProfile.id == ProfileLookup.social_profile_id) \
+            .order_by(ProfileLookup.created_at.desc()) \
+            .distinct() \
+            .limit(current_app.config.get('ITEMS_PER_PAGE')) \
+            .offset((page - 1) * current_app.config.get('ITEMS_PER_PAGE')) \
+            .all()
+        return profiles
 
 
 class SocialProfile(db.Model):
@@ -158,9 +166,17 @@ class SocialProfile(db.Model):
                 "spotify": self.spotify,
                 "linkedin": self.linkedin}
 
-    def get_queries(self):
-        # TODO -- sort, paginate, remove dublicates
-        return []
+    def get_viewers(self, page):
+        users = db.session.query(UserAccount)\
+                .join(ProfileLookup)\
+                .filter(UserAccount.id == ProfileLookup.user_id,
+                        self.id == ProfileLookup.social_profile_id)\
+                .order_by(ProfileLookup.created_at.desc())\
+                .distinct()\
+                .limit(current_app.config.get('ITEMS_PER_PAGE'))\
+                .offset((page - 1) * current_app.config.get('ITEMS_PER_PAGE'))\
+                .all()
+        return users
 
 
 class AccountAuthentication(db.Model):
